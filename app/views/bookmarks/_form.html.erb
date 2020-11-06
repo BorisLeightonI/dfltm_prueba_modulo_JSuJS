@@ -22,8 +22,16 @@
   </div>
 
   <div class="field">
-    <%= form.label :category_id %>
-    <%= form.text_field :category_id %>
+    <%= form.label :category_elements %>
+    <div class="row">
+    <% @categories.each do |item| %>
+      <%= form.check_box :category_elements, {multiple: true}, item.id, nil %>
+      <%= item.name %>
+      <% if item.categoryUp_id==nil %>
+        <br>
+      <% end %>
+    <% end %>
+    </div>
   </div>
 
   <div class="actions">

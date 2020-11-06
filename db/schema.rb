@@ -10,15 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_06_161539) do
+ActiveRecord::Schema.define(version: 2020_11_06_181119) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.string "name"
     t.integer "type_id"
-    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_bookmarks_on_category_id"
     t.index ["type_id"], name: "index_bookmarks_on_type_id"
   end
 
@@ -29,6 +27,15 @@ ActiveRecord::Schema.define(version: 2020_11_06_161539) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["categoryUp_id"], name: "index_categories_on_categoryUp_id"
+  end
+
+  create_table "has_categories", force: :cascade do |t|
+    t.integer "bookmark_id"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bookmark_id"], name: "index_has_categories_on_bookmark_id"
+    t.index ["category_id"], name: "index_has_categories_on_category_id"
   end
 
   create_table "types", force: :cascade do |t|
