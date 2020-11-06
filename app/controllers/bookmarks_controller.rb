@@ -32,6 +32,7 @@ class BookmarksController < ApplicationController
       if @bookmark.save
         format.html { redirect_to @bookmark, notice: 'Bookmark was successfully created.' }
         format.json { render :show, status: :created, location: @bookmark }
+        format.js {@bookmark}
       else
         format.html { render :new }
         format.json { render json: @bookmark.errors, status: :unprocessable_entity }
