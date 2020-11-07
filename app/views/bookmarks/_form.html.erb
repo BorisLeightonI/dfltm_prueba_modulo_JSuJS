@@ -28,7 +28,7 @@
   <strong>Tipos: </strong>
   <% @types.each do |type| %>
     <%= type.name  %>
-     <%= form.radio_button :type_id, type.id %>
+     <%= form.radio_button :type_id, type.id, checked: true %>
   <% end %>
   
   <br><br>
