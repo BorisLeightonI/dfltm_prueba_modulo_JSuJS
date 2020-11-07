@@ -36,7 +36,7 @@ class BookmarksController < ApplicationController
         @bookmarks = Bookmark.all
         format.html { redirect_to @bookmark, notice: 'Bookmark was successfully created.' }
         format.json { render :show, status: :created, location: @bookmark }
-        format.js { render file: "#{Rails.root}/app/views/bookmarks/index.html.erb", layout: false}
+        format.js { redirect_to root_path }
       else
         format.html { render :new }
         format.json { render json: @bookmark.errors, status: :unprocessable_entity }
