@@ -5,6 +5,7 @@ class BookmarksController < ApplicationController
   # GET /bookmarks.json
   def index
     @bookmarks = Bookmark.all
+    @group_var = @bookmarks.group(:type).count
   end
 
   # GET /bookmarks/1
@@ -15,6 +16,7 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks/new
   def new
+    @flag = 'nuevo'
     @bookmark = Bookmark.new
     @categories = Category.all
     @types = Type.all
@@ -22,6 +24,7 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks/1/edit
   def edit
+    @flag = 'Edita inline tu '
     @categories = Category.all
     @types = Type.all
   end
@@ -30,7 +33,7 @@ class BookmarksController < ApplicationController
   # POST /bookmarks.json
   def create
     @bookmark = Bookmark.new(bookmark_params)
-    
+    @flag = 'create'
     respond_to do |format|
       if @bookmark.save
         @bookmarks = Bookmark.all
