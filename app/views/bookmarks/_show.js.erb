@@ -1,2 +1,2 @@
-var show = $("<p><strong>Título: </strong><%=@post.title%> - <%=@post.content%></p>")
+var show = $("<p><strong>Título: </strong><%=@bookmark.name%> - <%=@bookmark.type.name%> - <% @bookmark.categories.each do |cat|%> <%=cat.name%> <% end %>  </p>")
 $('#show').html(show);

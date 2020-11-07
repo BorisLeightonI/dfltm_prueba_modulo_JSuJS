@@ -4,15 +4,14 @@
   <strong>Name:</strong>
   <%= @category.name %>
 </p>
-
+<p>
+  <strong>Categoryup name & ID:</strong>
+  <%= @category.categoryUp.name %> - 
+  <%= @category.categoryUp.id %>
+</p>
 <p>
   <strong>Public:</strong>
   <%= @category.public %>
-</p>
-
-<p>
-  <strong>Categoryup:</strong>
-  <%= @category.categoryUp %>
 </p>
 
 <%= link_to 'Edit', edit_category_path(@category) %> |

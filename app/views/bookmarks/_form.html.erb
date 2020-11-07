@@ -17,19 +17,38 @@
   </div>
 
   <div class="field">
-    <%= form.label :type_id %>
-    <%= form.text_field :type_id %>
+    <%#= form.label :type_id %>
+    <%#= form.text_field :type_id %>
   </div>
-
+  <strong>Tipos: </strong>
+  <% @types.each do |type| %>
+    <%= type.name  %>
+     <%= form.radio_button :type_id, type.id %>
+  <% end %>
+  
+  <br><br>
+  <strong>Categorías</strong>
   <div class="field">
-    <%= form.label :category_elements %>
+    <%#= form.label :category_elements %>
     <div class="row">
     <% @categories.each do |item| %>
-      <%= form.check_box :category_elements, {multiple: true}, item.id, nil %>
-      <%= item.name %>
-      <% if item.categoryUp_id==nil %>
-        <br>
-      <% end %>
+    <table style='display: inline-block; width: 100px; height: auto;'>
+       <% if item.categoryUp_id==nil %>
+      <thead >
+        <th>
+          <%= form.check_box :category_elements, {multiple: true}, item.id, nil %>
+        </th>
+        <th> <%= item.name %> </th>
+      </thead>
+        <% else %>
+          <tbody>
+          <tr >
+              <td><%= form.check_box :category_elements, {multiple: true}, item.id, nil %></td>
+              <td> <%= item.name %> </td>
+          </tr>
+          </tbody>
+        <% end %>
+    </table>
     <% end %>
     </div>
   </div>

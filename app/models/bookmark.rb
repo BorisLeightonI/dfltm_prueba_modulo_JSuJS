@@ -5,6 +5,7 @@ class Bookmark < ApplicationRecord
   has_many :categories, through: :has_categories
 
   attr_accessor :category_elements
+  attr_accessor :type_elements
 
   def save_categories
     # arrayCategories = category_elements.split(",")   Luego del checkbox multiple
@@ -18,4 +19,7 @@ class Bookmark < ApplicationRecord
     end
     
   end
+
+
+
 end

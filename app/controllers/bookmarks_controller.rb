@@ -10,17 +10,20 @@ class BookmarksController < ApplicationController
   # GET /bookmarks/1
   # GET /bookmarks/1.json
   def show
+    render(partial: 'show') if request.xhr?
   end
 
   # GET /bookmarks/new
   def new
     @bookmark = Bookmark.new
     @categories = Category.all
+    @types = Type.all
   end
 
   # GET /bookmarks/1/edit
   def edit
     @categories = Category.all
+    @types = Type.all
   end
 
   # POST /bookmarks
@@ -30,12 +33,14 @@ class BookmarksController < ApplicationController
     
     respond_to do |format|
       if @bookmark.save
+        @bookmarks = Bookmark.all
         format.html { redirect_to @bookmark, notice: 'Bookmark was successfully created.' }
         format.json { render :show, status: :created, location: @bookmark }
-        format.js {@bookmark}
+        format.js { render file: "#{Rails.root}/app/views/bookmarks/index.html.erb", layout: false}
       else
         format.html { render :new }
         format.json { render json: @bookmark.errors, status: :unprocessable_entity }
+        format.js { render :index }
       end
     end
     @bookmark.save_categories
@@ -48,9 +53,11 @@ class BookmarksController < ApplicationController
       if @bookmark.update(bookmark_params)
         format.html { redirect_to @bookmark, notice: 'Bookmark was successfully updated.' }
         format.json { render :show, status: :ok, location: @bookmark }
+        format.js {@bookmark}
       else
         format.html { render :edit }
         format.json { render json: @bookmark.errors, status: :unprocessable_entity }
+        format.js { render :index }
       end
     end
     @bookmark.save_categories
@@ -63,6 +70,7 @@ class BookmarksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to bookmarks_url, notice: 'Bookmark was successfully destroyed.' }
       format.json { head :no_content }
+      format.js 
     end
   end
 
